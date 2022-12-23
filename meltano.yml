@@ -1,0 +1,59 @@
+version: 1
+default_environment: dev
+project_id: d47db237-c40f-4922-9e5b-df626bc09216
+environments:
+- name: dev
+- name: staging
+- name: prod
+plugins:
+  extractors:
+  - name: tap-rest-api-msdk
+    variant: widen
+    pip_url: tap-rest-api-msdk
+    config:
+      api_url: https://raw.githubusercontent.com/caatdata/arms-and-security-fair-exhibitors/master/data/
+      streams:
+      - name: dsei-1999
+        path: dsei-1999.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2001
+        path: dsei-2001.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2003
+        path: dsei-2003.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2005
+        path: dsei-2005.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2007
+        path: dsei-2007.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2009
+        path: dsei-2009.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2011
+        path: dsei-2011.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2013
+        path: dsei-2013.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2015
+        path: dsei-2015.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2017
+        path: dsei-2017.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2019
+        path: dsei-2019.json
+        records_path: $.exhibitor[*]
+      - name: dsei-2021
+        path: dsei-2021.json
+        records_path: $.exhibitor[*]
+  loaders:
+  - name: target-parquet
+    variant: estrategiahq
+    pip_url: git+https://github.com/estrategiahq/target-parquet.git
+    config:
+      disable_collection: true
+      streams_in_separate_folder: true
+      destination_path: parquet
